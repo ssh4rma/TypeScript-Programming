@@ -17,3 +17,7 @@ console.log(charArr);
 for(let i : number = 0; i < charArr.length; ++i) {
     console.log(charArr[i]);
 }
+
+//tuples in JS
+const graph : [x: number, y : number] = [55, 21];
+console.log(graph);
