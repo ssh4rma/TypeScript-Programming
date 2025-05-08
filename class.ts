@@ -27,3 +27,15 @@ const c1 = new coordinates(10, 20, 30);
 console.log(`${c1.x} and ${c1.y} and ${c1.z}`); // Output: 10 and 20 and 30
 c1.scale(5);
 console.log(`${c1.x} and ${c1.y} and ${c1.z}`); // Output: 50 and 100 and 30
+
+//Getter and setters
+class C {
+  _length  = 0;
+  get len(): number {
+    return this._length;
+  }
+
+  set len(newL) {
+    this._length = newL;
+  }
+}
