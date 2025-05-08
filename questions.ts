@@ -17,3 +17,10 @@ console.log(Object.keys(Week).filter((val) => isNaN(Number(val))));
 
 //accessing the values of the enum
 console.log(Object.values(Week).filter((val) => typeof val === 'number'));
+
+//Use generics to write a function that returns the input value in an array.
+
+function fun<T>(value: T) : T[] {
+  return [value];
+} 
+console.log(fun(43));
