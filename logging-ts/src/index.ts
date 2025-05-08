@@ -14,3 +14,23 @@ const logger = createLogger({
 });
 
 logger.info("hello world");
+
+//save in file
+const logger2 = createLogger({
+  transports: [
+    new transports.File({
+      dirname: "logs",
+      filename: "winston_example.log",
+    }),
+    new transports.Console(), // Add console transport
+  ],
+  format: format.combine(
+    format.timestamp(),
+    format.printf(({ timestamp, level, message, service }) => {
+      return `[${timestamp}] ${service} ${level}: ${message}`;
+    })
+  ),
+  defaultMeta: {
+    service: "WinstonExample",
+  },
+});
