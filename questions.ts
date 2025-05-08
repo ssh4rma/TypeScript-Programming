@@ -14,3 +14,6 @@ console.log(Week);
 
 //assessing the string keys of the enum
 console.log(Object.keys(Week).filter((val) => isNaN(Number(val)))); 
+
+//accessing the values of the enum
+console.log(Object.values(Week).filter((val) => typeof val === 'number'));
