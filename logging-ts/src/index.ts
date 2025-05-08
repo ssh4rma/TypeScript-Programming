@@ -2,59 +2,59 @@
 
 import { createLogger, transports, format } from "winston";
 
-// const logger = createLogger({
-//   transports: [new transports.Console()], 
-//   format: format.combine(
-//     format.colorize(), 
-//     format.timestamp(),
-//     format.printf(({timestamp, level, message}) => {
-//       return `[${timestamp}] ${level}: ${message}`;
-//     })
-//   ),
-// });
+const logger = createLogger({
+  transports: [new transports.Console()], 
+  format: format.combine(
+    format.colorize(), 
+    format.timestamp(),
+    format.printf(({timestamp, level, message}) => {
+      return `[${timestamp}] ${level}: ${message}`;
+    })
+  ),
+});
 
-// logger.info("hello world");
+logger.info("hello world");
 
-// //save in file
-// const logger2 = createLogger({
-//   transports: [
-//     new transports.File({
-//       dirname: "logs",
-//       filename: "winston_example.log",
-//     }),
-//     new transports.Console(), // Add console transport
-//   ],
-//   format: format.combine(
-//     format.timestamp(),
-//     format.printf(({ timestamp, level, message, service }) => {
-//       return `[${timestamp}] ${service} ${level}: ${message}`;
-//     })
-//   ),
-//   defaultMeta: {
-//     service: "WinstonExample",
-//   },
-// });
+//save in file
+const logger2 = createLogger({
+  transports: [
+    new transports.File({
+      dirname: "logs",
+      filename: "winston_example.log",
+    }),
+    new transports.Console(), // Add console transport
+  ],
+  format: format.combine(
+    format.timestamp(),
+    format.printf(({ timestamp, level, message, service }) => {
+      return `[${timestamp}] ${service} ${level}: ${message}`;
+    })
+  ),
+  defaultMeta: {
+    service: "WinstonExample",
+  },
+});
 
-// //Stream
-// import { createWriteStream } from "fs";
-// import { timeStamp } from "console";
+//Stream
+import { createWriteStream } from "fs";
+import { timeStamp } from "console";
 
-// const logger3 = createLogger({
-//   transports: [
-//     new transports.Stream({
-//       stream: createWriteStream("hello.txt"),
-//     }),
-//   ],
-//   format: format.combine(
-//     format.timestamp(),
-//     format.printf(({ timestamp, level, message, service }) => {
-//       return `[${timestamp}] ${service} ${level}: ${message}`;
-//     })
-//   ),
-//   defaultMeta: {
-//     service: "WinstonExample",
-//   },
-// });
+const logger3 = createLogger({
+  transports: [
+    new transports.Stream({
+      stream: createWriteStream("hello.txt"),
+    }),
+  ],
+  format: format.combine(
+    format.timestamp(),
+    format.printf(({ timestamp, level, message, service }) => {
+      return `[${timestamp}] ${service} ${level}: ${message}`;
+    })
+  ),
+  defaultMeta: {
+    service: "WinstonExample",
+  },
+});
 
 //colorize transport
 const logger4 = createLogger({
