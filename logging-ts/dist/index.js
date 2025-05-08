@@ -1,42 +1,28 @@
 "use strict";
-// console.log('Hello, TypeScript Node.js project!');
 Object.defineProperty(exports, "__esModule", { value: true });
 const winston_1 = require("winston");
+const fs_1 = require("fs");
+// Ensure logs directory exists
+(0, fs_1.mkdirSync)("logs", { recursive: true });
+// Create a Winston logger
 const logger = (0, winston_1.createLogger)({
-    transports: [new winston_1.transports.Console()],
-    format: winston_1.format.combine(winston_1.format.colorize(), winston_1.format.timestamp(), winston_1.format.printf(({ timestamp, level, message }) => {
-        return `[${timestamp}] ${level}: ${message}`;
-    })),
-});
-logger.info("hello world");
-//save in file
-const logger2 = (0, winston_1.createLogger)({
     transports: [
+        // Console transport for terminal output
+        new winston_1.transports.Console(),
+        // File transport for writing to winston_example.log
         new winston_1.transports.File({
             dirname: "logs",
             filename: "winston_example.log",
         }),
-        new winston_1.transports.Console(), // Add console transport
     ],
-    format: winston_1.format.combine(winston_1.format.timestamp(), winston_1.format.printf(({ timestamp, level, message, service }) => {
-        return `[${timestamp}] ${service} ${level}: ${message}`;
+    format: winston_1.format.combine(winston_1.format.colorize({ all: true }), // Colorize console output
+    winston_1.format.timestamp(), // Add timestamp to logs
+    winston_1.format.printf(({ timestamp, level, message, service }) => {
+        return `[${timestamp}] ${service || "WinstonExample"} ${level}: ${message}`;
     })),
     defaultMeta: {
         service: "WinstonExample",
     },
 });
-//Stream
-const fs_1 = require("fs");
-const logger3 = (0, winston_1.createLogger)({
-    transports: [
-        new winston_1.transports.Stream({
-            stream: (0, fs_1.createWriteStream)("hello.txt"),
-        }),
-    ],
-    format: winston_1.format.combine(winston_1.format.timestamp(), winston_1.format.printf(({ timestamp, level, message, service }) => {
-        return `[${timestamp}] ${service} ${level}: ${message}`;
-    })),
-    defaultMeta: {
-        service: "WinstonExample",
-    },
-});
+// Log a message to test
+logger.info("Hello world!", { correlationId: "123", userId: "456" });
