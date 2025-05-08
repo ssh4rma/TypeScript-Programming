@@ -16,6 +16,22 @@ const logger2 = (0, winston_1.createLogger)({
             dirname: "logs",
             filename: "winston_example.log",
         }),
+        new winston_1.transports.Console(), // Add console transport
+    ],
+    format: winston_1.format.combine(winston_1.format.timestamp(), winston_1.format.printf(({ timestamp, level, message, service }) => {
+        return `[${timestamp}] ${service} ${level}: ${message}`;
+    })),
+    defaultMeta: {
+        service: "WinstonExample",
+    },
+});
+//Stream
+const fs_1 = require("fs");
+const logger3 = (0, winston_1.createLogger)({
+    transports: [
+        new winston_1.transports.Stream({
+            stream: (0, fs_1.createWriteStream)("hello.txt"),
+        }),
     ],
     format: winston_1.format.combine(winston_1.format.timestamp(), winston_1.format.printf(({ timestamp, level, message, service }) => {
         return `[${timestamp}] ${service} ${level}: ${message}`;
