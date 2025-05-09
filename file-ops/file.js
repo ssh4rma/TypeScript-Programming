@@ -14,3 +14,9 @@ fs.appendFile(filePath, '\nThis line is appended.', (err) => {
   if(err) throw err;
   console.log('Data is successfully appended'); 
 })
+
+//read the file
+fs.readFile(filePath, 'utf8', (err, data) => {
+  if(err) throw err;
+  console.log('File content is: ', data);
+})
