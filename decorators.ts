@@ -93,3 +93,29 @@ function configurable(value: boolean) {
     descriptor.configurable(value);
   }
 }
+
+//Property decorator
+class Greeter2 {
+  @format('Hello, %s')
+  greeting: string; 
+
+  constructor(message: string) {
+    this.greeting = message;
+  }
+
+  greet() {
+    let formatString = getFormat(this, 'greeting');
+    return formatString.replace('%s', this.greeting);
+  }
+}
+
+import "reflect-metadata";
+const formatMetaDataKey = Symbol("format");
+
+function format(formatString: string) {
+  return Reflect.metadata(formatMetaDataKey, formatString);
+}
+
+function getFormat(target: any, propertyKey: string) {
+  return Reflect.getMetadata(formatMetaDataKey, target, propertyKey);
+}
