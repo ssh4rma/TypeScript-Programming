@@ -43,3 +43,26 @@ function reportableClassDecorator<T extends {new (...args: any[]): {}}> (constru
 const bug = new BugReport("Issue #123");
 console.log(bug.type); 
 console.log(bug.reportingURL);
+
+//method decorators
+class Greeter {
+  greeting: string;
+  constructor(message: string) {
+    this.greeting = message; 
+  }
+
+  @enumerable(false)
+  greet() {
+    return `Hello User ${this.greeting}`;
+  }
+}
+
+function enumerable (value: boolean) {
+  return function(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+    descriptor.enumerable  = value; 
+  };
+}
+
+const g = new Greeter('this is shubham');
+console.log(g.greet()); 
+console.log(Object.getOwnPropertyDescriptors(g.greet()));
