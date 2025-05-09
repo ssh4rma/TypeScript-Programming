@@ -19,7 +19,7 @@ class ExampleClass {
 }
 
 //class decorator
-@sealed
+@reportableClassDecorator
 class BugReport {
   type = 'report'; 
   title: string; 
@@ -33,3 +33,13 @@ function sealed(constructor: Function) {
   Object.seal(constructor);
   Object.seal(constructor.prototype);
 }
+
+function reportableClassDecorator<T extends {new (...args: any[]): {}}> (constructor: T) {
+  return class extends constructor {
+    reportingURL = 'https://www...';
+  };
+}
+
+const bug = new BugReport("Issue #123");
+console.log(bug.type); 
+console.log(bug.reportingURL);
