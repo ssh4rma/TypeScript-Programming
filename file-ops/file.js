@@ -20,3 +20,9 @@ fs.readFile(filePath, 'utf8', (err, data) => {
   if(err) throw err;
   console.log('File content is: ', data);
 })
+
+const newPath = path.join(__dirname, 'renamed-example.txt');
+fs.rename(filePath, newPath, (err) => {
+  if(err) throw err;
+  console.log('file is successfully renamed');
+})
