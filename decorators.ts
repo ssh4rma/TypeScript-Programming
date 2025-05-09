@@ -66,3 +66,30 @@ function enumerable (value: boolean) {
 const g = new Greeter('this is shubham');
 console.log(g.greet()); 
 console.log(Object.getOwnPropertyDescriptors(g.greet()));
+
+//accessor decorator
+class Point {
+  _x: number; 
+  _y: number;
+
+  constructor(x: number, y: number) {
+    this._x = x;
+    this._y = y; 
+  }
+
+  @configurable(false) 
+  get x() {
+    return this._x;
+  }
+
+  @configurable(true) 
+  get y() {
+    return this._y;
+  }
+} 
+
+function configurable(value: boolean) {
+  return function(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+    descriptor.configurable(value);
+  }
+}
