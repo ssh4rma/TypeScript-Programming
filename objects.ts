@@ -13,3 +13,4 @@ for(let i in obj) {
 for(let i in obj) {
   console.log(obj[i]);
 }
+
